@@ -352,23 +352,21 @@ END OF LAB INSTRUCTIONS
 ===================================================================
 */
 
-import { useEffect, useState } from 'react';
-import './index.css';
+import { useEffect, useState } from "react";
+import "./index.css";
 
 export default function App() {
-  // TODO 9:
-  // Create state to store student data
-  // Syntax hint:
-  // const [student, setStudent] = useState(____);
+  // TODO 9: Create state to store student data
+  const [student, setStudent] = useState(null);
 
-  // TODO 8:
-  // Request student data from the server when the page loads
-  // Syntax hint:
-  // fetch('http://localhost:3000/student')
-  //   .then((res) => res.json())
-  //   .then((data) => {
-  //     setStudent(data);
-  //   });
+  // TODO 8: Request student data from the server when the page loads
+  useEffect(() => {
+    fetch("http://localhost:3000/student")
+      .then((res) => res.json())
+      .then((data) => {
+        setStudent(data);
+      });
+  }, []);
 
   return (
     <main className="app-shell">
@@ -376,7 +374,8 @@ export default function App() {
         <p className="tag">Node + React Intro Lab</p>
         <h1>Student Information</h1>
         <p className="subtitle">
-          This page shows one simple example of React receiving data from the back-end.
+          This page shows one simple example of React receiving data from the
+          back-end.
         </p>
       </section>
 
@@ -385,9 +384,7 @@ export default function App() {
 
         {student ? (
           <div className="student-info">
-            <div className="avatar">
-              {student.name?.charAt(0)}
-            </div>
+            <div className="avatar">{student.name?.charAt(0)}</div>
 
             <div>
               <h3>{student.name}</h3>
